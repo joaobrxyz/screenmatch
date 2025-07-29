@@ -51,7 +51,7 @@ public class Principal {
                 .collect(Collectors.toList());
                 //.toList();
 
-        System.out.println("\nTop 10 episódios");
+        /* System.out.println("\nTop 10 episódios");
         dadosEpisodios.stream()
                 .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
                 .peek(e -> System.out.println("Primeiro filtro(N/A) " + e))
@@ -61,7 +61,7 @@ public class Principal {
                 .peek(e -> System.out.println("Limite " + e))
                 .map(e -> e.titulo().toUpperCase())
                 .peek(e -> System.out.println("Mapeamento " + e))
-                .forEach(System.out::println);
+                .forEach(System.out::println); */
 
         List<Episodio> episodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream()
@@ -70,7 +70,21 @@ public class Principal {
 
         episodios.forEach(System.out::println);
 
-        System.out.print("A partir de que ano você deseja ver os episódios? ");
+        System.out.println("Digite um trecho do título do episódio: ");
+        var trechoTitulo = leitura.nextLine();
+
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
+                .findFirst();
+
+        if (episodioBuscado.isPresent()) {
+            System.out.println("Episódio encontrado!");
+            System.out.println("Temporada: " + episodioBuscado.get().getTemporada());
+        } else {
+            System.out.println("Episódio não encontrado!");
+        }
+
+        /* System.out.print("A partir de que ano você deseja ver os episódios? ");
         var ano = leitura.nextInt();
         leitura.nextLine();
         LocalDate dataBusca = LocalDate.of(ano, 1, 1);
@@ -82,6 +96,6 @@ public class Principal {
                         "Temporada: " + e.getTemporada() +
                                 " Episódio: " + e.getTitulo() +
                                 "Data lançamento: " + e.getDataLancamento().format(formatador)
-                ));
+                )); */
     }
 }
