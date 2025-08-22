@@ -4,6 +4,8 @@ import br.com.alura.screenmatch.service.traducao.ConsultaMyMemory;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GeneratorType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalDouble;
 
 @Entity
@@ -21,6 +23,8 @@ public class Serie {
     private String atores;
     private String poster;
     private String sinopse;
+    @Transient
+    private List<Episodio> episodios = new ArrayList<>();
 
     public Serie(DadosSerie dadosSerie) {
         this.titulo = dadosSerie.titulo();
@@ -40,6 +44,14 @@ public class Serie {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        this.episodios = episodios;
     }
 
     public String getTitulo() {
