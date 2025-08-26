@@ -2,7 +2,6 @@ package br.com.alura.screenmatch.model;
 
 import br.com.alura.screenmatch.service.traducao.ConsultaMyMemory;
 import jakarta.persistence.*;
-import org.hibernate.annotations.GeneratorType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,8 @@ public class Serie {
     private String atores;
     private String poster;
     private String sinopse;
-    @Transient
+
+    @OneToMany(mappedBy = "serie")
     private List<Episodio> episodios = new ArrayList<>();
 
     public Serie() {}
