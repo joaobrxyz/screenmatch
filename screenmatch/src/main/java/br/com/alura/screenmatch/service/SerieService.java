@@ -31,7 +31,7 @@ public class SerieService {
     }
 
     public List<SerieDTO> obterLancamentos() {
-        return converteDados(repository.encontrarEpisodiosMaisRecentes());
+        return converteDados(repository.lancamentosMaisRecentes());
     }
 
     public SerieDTO obterPorId(Long id) {
